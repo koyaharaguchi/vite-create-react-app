@@ -1,0 +1,19 @@
+version: '3'
+volumes:
+  node_modules:
+services:
+  node:
+    image: node:19-alpine3.15
+    tty: true
+    volumes:
+      - type: bind
+        source: ./react
+        target: /app
+      - type: volume
+        source: node_modules
+        target: /app/node_modules
+        volume:
+          nocopy: true
+    ports:
+      - 5173:5173
+    working_dir: /app
